@@ -32,7 +32,13 @@ function App() {
       marginTop: 40,
       boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
     }}>
-      <h1 style={{ textAlign: 'center', color: '#4DB6AC' }}>🌙 Ease Space</h1>
+      <h1 style={{
+        textAlign: 'center',
+        fontSize: '2.5rem',
+        color: '#4DB6AC',
+        textShadow: '0 0 8px #4DB6AC, 0 0 12px #81d4cb',
+        fontWeight: 600
+      }}>EASE ✧ SPACE</h1>
       <p style={{ textAlign: 'center', fontSize: '1rem', marginBottom: 30 }}>
         無需姓名，靈魂會記得你。
       </p>
