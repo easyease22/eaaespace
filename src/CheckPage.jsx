@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 function CheckPage() {
@@ -23,22 +22,13 @@ function CheckPage() {
   };
 
   return (
-    <div style={{ padding: '40px', textAlign: 'center' }}>
-      <h2 style={{ fontSize: '2rem', color: '#4DB6AC' }}>🔍 查詢靈魂回信</h2>
-      <input
-        type="text"
-        placeholder="請輸入你的查詢代碼"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        style={{ padding: '10px', width: '80%', maxWidth: '400px', borderRadius: '8px', border: '1px solid #ccc', marginBottom: '16px' }}
-      />
-      <br />
-      <button onClick={handleCheck} style={{ padding: '12px 24px', backgroundColor: '#4DB6AC', color: '#fff', border: 'none', borderRadius: '8px' }}>查詢</button>
-      <div style={{ marginTop: '20px' }}>
-        {status === 'success' && <p>{reply}</p>}
-        {status === 'notfound' && <p style={{ color: 'gray' }}>❌ 找不到回信，請稍後再查或確認代碼正確。</p>}
-        {status === 'error' && <p style={{ color: 'red' }}>⚠️ 系統錯誤，請稍後再試。</p>}
-      </div>
+    <div>
+      <h2>🔍 查詢靈魂回信</h2>
+      <input value={code} onChange={e => setCode(e.target.value)} placeholder="請輸入查詢代碼" />
+      <button onClick={handleCheck}>查詢</button>
+      {status === 'success' && <p>{reply}</p>}
+      {status === 'notfound' && <p>❌ 找不到回信</p>}
+      {status === 'error' && <p>⚠️ 系統錯誤</p>}
     </div>
   );
 }
