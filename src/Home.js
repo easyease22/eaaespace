@@ -36,7 +36,7 @@ function Home() {
         }}>📝 我要投稿</button>
       </a>
 
-      <a href="/check" rel="noreferrer">
+      <a href="/check">
         <button style={{
           width: '100%',
           padding: 12,

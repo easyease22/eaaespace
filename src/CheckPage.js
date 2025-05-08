@@ -1,26 +1,24 @@
 
 import React, { useState } from 'react';
 
-const MOCK_REPLIES = {
-  "sam0922": "你唔需要為左迎合世界而壓抑自己，宇宙會記得你真正嘅樣子。",
-  "moon888": "請相信，脆弱都係一種美。",
-  "EA-001": "你值得被聽見，也值得被理解。"
-};
-
 function CheckPage() {
-  const [code, setCode] = useState("");
-  const [reply, setReply] = useState(null);
-  const [notFound, setNotFound] = useState(false);
+  const [code, setCode] = useState('');
+  const [reply, setReply] = useState('');
+  const [status, setStatus] = useState('');
 
-  const handleCheck = () => {
-    const trimmed = code.trim().toLowerCase();
-    const response = MOCK_REPLIES[trimmed];
-    if (response) {
-      setReply(response);
-      setNotFound(false);
-    } else {
-      setReply(null);
-      setNotFound(true);
+  const handleCheck = async () => {
+    setStatus('loading');
+    try {
+      const res = await fetch(`/api/check?code=${code}`);
+      const data = await res.json();
+      if (res.ok) {
+        setReply(data.reply);
+        setStatus('success');
+      } else {
+        setStatus('notfound');
+      }
+    } catch (err) {
+      setStatus('error');
     }
   };
 
@@ -65,15 +63,10 @@ function CheckPage() {
       >
         查詢
       </button>
-      {reply && (
-        <div>
-          <h3>📬 靈魂回信：</h3>
-          <p style={{ fontSize: '1.1rem', color: '#555' }}>{reply}</p>
-        </div>
-      )}
-      {notFound && (
-        <p style={{ color: 'gray', marginTop: 20 }}>❌ 找不到回信，請稍後再查或確認代碼正確。</p>
-      )}
+
+      {status === 'success' && <p style={{ fontSize: '1.1rem', color: '#555' }}>{reply}</p>}
+      {status === 'notfound' && <p style={{ color: 'gray' }}>❌ 找不到回信，請稍後再查或確認代碼正確。</p>}
+      {status === 'error' && <p style={{ color: 'red' }}>⚠️ 系統錯誤，請稍後再試。</p>}
     </div>
   );
 }
